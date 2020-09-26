@@ -2,6 +2,7 @@ package com.task.data.remote
 
 import com.task.data.remote.moshiFactories.MyKotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
+import com.task.APP_KEY
 import com.task.BuildConfig
 import com.task.data.remote.moshiFactories.MyStandardJsonAdapters
 import com.task.BASE_URL
@@ -20,6 +21,7 @@ import javax.inject.Singleton
  */
 
 private const val timeoutRead = 30   //In seconds
+private const val appKey = "appKey"
 private const val accept = "Accept"
 private const val contentType = "Content-Type"
 private const val contentTypeValue = "application/json"
@@ -36,6 +38,7 @@ class ServiceGenerator @Inject constructor() {
         val request = original.newBuilder()
                 .header(contentType, contentTypeValue)
                 .header(accept, contentTypeValue)
+                .header(appKey, APP_KEY)
                 .method(original.method, original.body)
                 .build()
 

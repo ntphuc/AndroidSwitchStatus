@@ -59,7 +59,7 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
 
     override suspend fun requestListSwitches(requestBodySwitches: RequestBodySwitches): Resource<Switches> {
         val recipesService = serviceGenerator.createService(RecipesService::class.java)
-        return when (val response = processCallParam(requestBodySwitches, recipesService::fetchSwitches)) {
+        return when (val response = processCall ( recipesService::fetchSwitches)) {
             is Switches -> {
                 Resource.Success(data = Switches(response.switches as ArrayList<ItemSwitch>))
             }
