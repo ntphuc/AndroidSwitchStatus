@@ -19,6 +19,6 @@ interface RecipesService {
     @GET("recipes.json")
     suspend fun fetchRecipes(): Response<List<RecipesItem>>
     @POST("OpenAPI/Services/GetSwitches")
-    suspend fun fetchSwitches(): Response<Switches>
+    suspend fun fetchSwitches(@Body bodySwitches: BaseRequest): Response<Switches>
 
 }
