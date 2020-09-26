@@ -5,6 +5,7 @@ import com.squareup.moshi.Moshi
 import com.task.BuildConfig
 import com.task.data.remote.moshiFactories.MyStandardJsonAdapters
 import com.task.BASE_URL
+import com.task.BASE_URL_THINGWORX
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,6 +20,7 @@ import javax.inject.Singleton
  */
 
 private const val timeoutRead = 30   //In seconds
+private const val accept = "Accept"
 private const val contentType = "Content-Type"
 private const val contentTypeValue = "application/json"
 private const val timeoutConnect = 30   //In seconds
@@ -33,6 +35,7 @@ class ServiceGenerator @Inject constructor() {
 
         val request = original.newBuilder()
                 .header(contentType, contentTypeValue)
+                .header(accept, contentTypeValue)
                 .method(original.method, original.body)
                 .build()
 
@@ -55,7 +58,7 @@ class ServiceGenerator @Inject constructor() {
         okHttpBuilder.readTimeout(timeoutRead.toLong(), TimeUnit.SECONDS)
         val client = okHttpBuilder.build()
         retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL).client(client)
+                .baseUrl(BASE_URL_THINGWORX).client(client)
                 .addConverterFactory(MoshiConverterFactory.create(getMoshi()))
                 .build()
     }

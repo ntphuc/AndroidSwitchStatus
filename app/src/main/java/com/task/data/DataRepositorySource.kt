@@ -3,6 +3,7 @@ package com.task.data
 import com.task.data.dto.recipes.Recipes
 import com.task.data.dto.login.LoginRequest
 import com.task.data.dto.login.LoginResponse
+import com.task.data.dto.switches.Switches
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
  */
 
 interface DataRepositorySource {
+    suspend fun requestListSwitches(): Flow<Resource<Switches>>
     suspend fun requestRecipes(): Flow<Resource<Recipes>>
     suspend fun doLogin(loginRequest: LoginRequest): Flow<Resource<LoginResponse>>
     suspend fun addToFavourite(id: String): Flow<Resource<Boolean>>

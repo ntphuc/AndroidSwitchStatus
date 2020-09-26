@@ -7,6 +7,7 @@ import com.task.ui.component.details.DetailsViewModel
 import com.task.ui.component.login.LoginViewModel
 import com.task.ui.component.recipes.RecipesListViewModel
 import com.task.ui.component.splash.SplashViewModel
+import com.task.ui.component.switches.SwitchListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -20,6 +21,12 @@ import dagger.multibindings.IntoMap
 abstract class ViewModelModule {
     @Binds
     internal abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SwitchListViewModel::class)
+    abstract fun bindSwitchViewModel(viewModel: SwitchListViewModel): ViewModel
 
     @Binds
     @IntoMap
