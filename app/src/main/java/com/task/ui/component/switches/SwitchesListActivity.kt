@@ -1,8 +1,15 @@
 package com.task.ui.component.switches
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.task.ACTION_PUSH_NOTIFICATION
+import com.task.LOG_TAG
 import com.task.data.Resource
 import com.task.data.dto.switches.Switches
 import com.task.databinding.SwitchListActivityBinding
@@ -22,12 +29,28 @@ class SwitchesListActivity : BaseActivity() {
     @Inject
     lateinit var switchListViewModel: SwitchListViewModel
 
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
+    val broadCastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(contxt: Context?, intent: Intent?) {
+
+            when (intent?.action) {
+                ACTION_PUSH_NOTIFICATION -> handleStatusChanged()
+
+            }
+        }
+    }
+
+    private fun handleStatusChanged() {
+        Log.e(LOG_TAG, "handleStatusChanged")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        registerBroadcast()
+
         val layoutManager = LinearLayoutManager(this)
         binding.rvSwitchesList.layoutManager = layoutManager
         binding.rvSwitchesList.setHasFixedSize(true)
@@ -47,6 +70,17 @@ class SwitchesListActivity : BaseActivity() {
         binding = SwitchListActivityBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)    
+    }
+
+    private fun registerBroadcast() {
+
+        val intentFilter = IntentFilter(ACTION_PUSH_NOTIFICATION)
+        registerReceiver(broadCastReceiver, intentFilter)
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(broadCastReceiver)
+        super.onDestroy()
     }
 
     private fun handleSwitchesList(status: Resource<Switches>) {
