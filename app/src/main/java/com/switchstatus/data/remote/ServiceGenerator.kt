@@ -1,6 +1,6 @@
 package com.switchstatus.data.remote
 
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.squareup.moshi.Moshi
 import com.switchstatus.APP_KEY
 import com.switchstatus.BASE_URL_THINGWORX
@@ -12,9 +12,11 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.reflect.Modifier
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
+
 
 /**
  * Created by AhmedEltaher
@@ -62,7 +64,9 @@ class ServiceGenerator @Inject constructor() {
         val client = okHttpBuilder.build()
         retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL_THINGWORX).client(client)
-                .addConverterFactory(GsonConverterFactory.create(Gson()))
+                .addConverterFactory(GsonConverterFactory.create(GsonBuilder()
+                        .excludeFieldsWithModifiers(Modifier.TRANSIENT)
+                        .disableHtmlEscaping().create()))
                 .build()
     }
 

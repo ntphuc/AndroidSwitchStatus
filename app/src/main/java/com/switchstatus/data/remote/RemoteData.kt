@@ -1,5 +1,6 @@
 package com.switchstatus.data.remote
 
+import com.google.gson.JsonObject
 import com.switchstatus.data.Resource
 import com.switchstatus.data.dto.recipes.Recipes
 import com.switchstatus.data.dto.recipes.RecipesItem
@@ -127,21 +128,23 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
         }
     }
 
-    private suspend fun processCallUpdateStatus(itemSwitch: ItemSwitch, request: BaseRequest, responseCall: suspend (String, String) -> Response<*>): Any? {
+    private suspend fun processCallUpdateStatus(itemSwitch: ItemSwitch, request: BaseRequest, responseCall: suspend (String, JsonObject) -> Response<*>): Any? {
         if (!networkConnectivity.isConnected()) {
             return NO_INTERNET_CONNECTION
         }
-        val body: String = "{\"status\":false}";
+        //val body: String = "{\"status\":false}";
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("status", !itemSwitch.status)
         return try {
-            val response = responseCall.invoke(itemSwitch.name, body)
+            val response = responseCall.invoke(itemSwitch.name, jsonObject)
             val responseCode = response.code()
             if (response.isSuccessful) {
-                ItemStatus (itemSwitch,(request as RequestUpdateStatus).status)
+                ItemStatus(itemSwitch, (request as RequestUpdateStatus).status)
             } else {
                 responseCode
             }
 
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             NETWORK_ERROR
         }
     }

@@ -1,6 +1,8 @@
 package com.switchstatus.data.remote.service
 
+import com.google.gson.JsonObject
 import com.switchstatus.data.dto.recipes.RecipesItem
+import com.switchstatus.data.dto.switches.ItemStatus
 import com.switchstatus.data.dto.switches.Switches
 import retrofit2.Response
 import retrofit2.http.*
@@ -15,6 +17,6 @@ interface RecipesService {
     @POST("OpenAPI/Services/GetSwitches")
     suspend fun fetchSwitches(@Body bodySwitches: String): Response<Switches>
     @PUT("{itemName}/Properties/status")
-    suspend fun updateStatus(@Path("itemName") itemName : String, @Body body: String): Response<Boolean>
+    suspend fun updateStatus(@Path("itemName") itemName : String, @Body body: JsonObject): Response<ItemStatus>
 
 }

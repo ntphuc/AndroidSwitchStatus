@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.gms.tasks.OnCompleteListener
@@ -82,8 +83,7 @@ class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
         val layoutManager = LinearLayoutManager(this)
         binding.rvSwitchesList.layoutManager = layoutManager
         binding.rvSwitchesList.setHasFixedSize(true)
-       // binding.rvSwitchesList.addItemDecoration(DividerItemDecoration(binding.rvSwitchesList.getContext(), DividerItemDecoration.VERTICAL))
-
+        binding.rvSwitchesList.addItemDecoration(DividerItemDecoration(binding.rvSwitchesList.getContext(), DividerItemDecoration.VERTICAL))
 
         switchListViewModel.fetchListSwitches(true)
     }
@@ -144,7 +144,7 @@ class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
     private fun handleUpdateStatus(result: Resource<ItemStatus>) {
         when (result) {
             is Resource.Success -> result.data?.let {
-                bindingNewStatus(it)
+              //  bindingNewStatus(it)
             }
             is Resource.DataError -> {
                 result.errorCode?.let { switchListViewModel.showToastMessage(it) }

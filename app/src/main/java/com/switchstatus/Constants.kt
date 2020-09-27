@@ -4,7 +4,7 @@ package com.switchstatus
  * Created by AhmedEltaher
  */
 
-const val TIME_DELAY_REFRESH : Long = 60000
+const val TIME_DELAY_REFRESH : Long = 6000
 const val SPLASH_DELAY = 3000
 const val BASE_URL = "https://hf-android-app.s3-eu-west-1.amazonaws.com/android-test/"
 const val RECIPE_ITEM_KEY = "RECIPE_ITEM_KEY"
