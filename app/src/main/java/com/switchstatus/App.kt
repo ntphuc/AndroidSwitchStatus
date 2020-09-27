@@ -2,6 +2,7 @@ package com.switchstatus
 
 import android.content.Context
 import androidx.multidex.MultiDexApplication
+import com.google.firebase.FirebaseApp
 import com.switchstatus.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -22,6 +23,7 @@ open class App : MultiDexApplication(), HasAndroidInjector {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+        FirebaseApp.initializeApp(this);
         initDagger()
     }
 

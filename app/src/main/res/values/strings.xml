@@ -30,4 +30,10 @@
     <string name="test_password">ahmed</string>
     <string name="test_email">ahmed@ahmed.ahmed</string>
     <string name="title_switch_demo">Switch Demo</string>
+
+    <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
+    <string name="msg_subscribed">Subscribed to weather topic</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+
+
 </resources>

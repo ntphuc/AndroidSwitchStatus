@@ -7,9 +7,15 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.switchstatus.ACTION_PUSH_NOTIFICATION
 import com.switchstatus.LOG_TAG
+import com.switchstatus.R
 import com.switchstatus.data.Resource
 import com.switchstatus.data.dto.switches.Switches
 import com.switchstatus.databinding.SwitchListActivityBinding
@@ -56,6 +62,39 @@ class SwitchesListActivity : BaseActivity() {
         binding.rvSwitchesList.setHasFixedSize(true)
 
         switchListViewModel.fetchListSwitches()
+    }
+
+    private fun subcribeTopicNotify() {
+        // [START subscribe_topics]
+        FirebaseMessaging.getInstance().subscribeToTopic("switch")
+                .addOnCompleteListener { task ->
+                    var msg = getString(R.string.msg_subscribed)
+                    if (!task.isSuccessful) {
+                        msg = getString(R.string.msg_subscribe_failed)
+                    }
+                    Log.d(LOG_TAG, msg)
+                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                }
+        // [END subscribe_topics]
+
+        // [START retrieve_current_token]
+        FirebaseInstanceId.getInstance().instanceId
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.w(LOG_TAG, "getInstanceId failed", task.exception)
+                        return@OnCompleteListener
+                    }
+
+                    // Get new Instance ID token
+                    val token = task.result?.token
+
+                    // Log and toast
+                    val msg = getString(R.string.msg_token_fmt, token)
+                    Log.d(LOG_TAG, msg)
+                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+
+                })
+        // [END retrieve_current_token]
     }
 
     override fun initializeViewModel() {

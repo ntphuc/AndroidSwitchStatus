@@ -8,6 +8,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-platform-android'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 29
     buildToolsVersion '29.0.3'
@@ -39,7 +41,6 @@ android {
     productFlavors {
         dev {
             dimension = 'default'
-            applicationIdSuffix = ".dev"
         }
         prod {
             dimension = 'default'
