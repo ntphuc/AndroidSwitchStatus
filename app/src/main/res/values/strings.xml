@@ -34,6 +34,9 @@
     <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
     <string name="msg_subscribed">Subscribed to weather topic</string>
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="title_switch_off">Swich off</string>
+    <string name="message_switch_off">One of switches is turned off suddenly</string>
+    <string name="ok">Ok</string>
 
 
 </resources>

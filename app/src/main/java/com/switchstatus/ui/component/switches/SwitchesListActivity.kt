@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
@@ -28,6 +29,7 @@ import com.switchstatus.utils.observe
 import com.switchstatus.utils.toGone
 import com.switchstatus.utils.toVisible
 import javax.inject.Inject
+
 
 class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
 
@@ -52,6 +54,12 @@ class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
 
     private fun handleStatusChanged() {
         Log.e(LOG_TAG, "handleStatusChanged")
+        MaterialDialog(this).show {
+            title(R.string.title_switch_off)
+            message(R.string.message_switch_off)
+            positiveButton(R.string.ok)
+
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +72,8 @@ class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
         val layoutManager = LinearLayoutManager(this)
         binding.rvSwitchesList.layoutManager = layoutManager
         binding.rvSwitchesList.setHasFixedSize(true)
+       // binding.rvSwitchesList.addItemDecoration(DividerItemDecoration(binding.rvSwitchesList.getContext(), DividerItemDecoration.VERTICAL))
+
 
         switchListViewModel.fetchListSwitches()
     }

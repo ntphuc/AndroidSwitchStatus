@@ -4,4 +4,118 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#3F51B5</color>
     <color name="image_background">#123</color>
+
+    <color name="rbm_menu_background">#303030</color>
+    <color name="rbm_item_text_color">#ffffff</color>
+    <color name="Black">#000000</color>
+    <color name="Yellow">#ffff00</color>
+    <color name="White">#ffffff</color>
+    <color name="red">#ffFF0000</color>
+    <color name="Black2_bg">#080808</color>
+    <color name="green">#ff00ff00</color>
+    <color name="DarkestGrey">#202020</color>
+    <color name="DarkGrey2">#282828</color>
+    <color name="DarkGrey1">#2f2f2f</color>
+    <color name="LightGrey1">#aaaaaa</color>
+    <color name="transparent">#00000000</color>
+    <color name="facebookblue">#3b5998</color>
+    <color name="text_grey">#6f6f6f</color>
+    <color name="Grey">#666666</color>
+    <color name="color_start_gradient">#2C2C2C</color>
+    <color name="color_end_gradient">#000000</color>
+    <color name="text_color_hint">#D9D9D9</color>
+    <color name="bridge_yellow">#ffd800</color>
+    <color name="bridge_yellow_high_light">#AAF2E172</color>
+
+    <color name="dialog_background_light">#f5f5f5</color>
+    <color name="grey_v1">#777777</color>
+    <color name="yellow_v1">#ffd600</color>
+    <color name="text_light_grey">#C2C2C2</color>
+
+    <color name="user_name_color_black">#424242</color>
+
+    <!-- login page -->
+    <color name="login_field_stroke">#55aaaaaa</color>
+    <!-- login page -->
+
+    <color name="bg_gradient_end">#111111</color>
+
+    <color name="dark_blue">#76a0dc</color>
+    <color name="top_bar_bg">#212121</color>
+    <color name="bg_athlete_panel">#555555</color>
+    <color name="calendar_inactive_color">#999999</color>
+    <color name="calendar_out_of_month_color">#333333</color>
+
+    <color name="circular_progress_background">#ff737373</color>
+
+    <color name="notification_read">#000000</color>
+    <color name="notification_unread">#333333</color>
+    <color name="assessment_yellow">#FFD603</color>
+    <color name="text_exercise_history">#BDBDBD</color>
+    <color name="text_exercise_history_black">#555555</color>
+    <color name="text_exercise_history_item">#545454</color>
+    <color name="group_gray_bg">#545454</color>
+    <color name="group_gray_bg_header">#EEEEEE</color>
+
+    <color name="color_workset">#616161</color>
+    <color name="color_warmup_2">#CDCDCD</color>
+    <color name="color_warmup">#E0E0E0</color>
+    <color name="color_tracked">#76a0dc</color>
+    <color name="color_required">#ffFF0000</color>
+
+    <color name="bg_workout_view">#232323</color>
+    <color name="black_50">#b4080808</color>
+    <color name="white_50">#d9ffffff</color>
+    <color name="green_mp">#008100</color>
+    <color name="red_mp">#FF3E20</color>
+
+    <!-- Post workout -->
+    <color name="post_workout">#646464</color>
+    <color name="post_workout_opacity">#80646464</color>
+    <color name="post_workout_indicator_bg">#DCDCDC</color>
+    <color name="white_grey">#E7E4E4</color>
+
+    <color name="grey_title_dialog">#F1F1F1</color>
+
+    <color name="stroke_gray">#A4A4A4</color>
+    <color name="text_dark_blue">#212121</color>
+    <color name="text_white">#ffffff</color>
+    <color name="bg_automation_phase_selected">#b4080808</color>
+    <color name="white">#ffffff</color>
+    <color name="text_gray">#C2C2C2</color>
+    <color name="text_dark_grey">#ff737373</color>
+    <color name="bg_light_grey">#DCDCDC</color>
+    <color name="bg_selected">#DCDCDC</color>
+    <color name="text_session">#424242</color>
+    <color name="text_link_button">#60a2e8</color>
+    <color name="bg_below_dialog">#83000000</color>
+    <color name="bg_dim_dialog">#44000000</color>
+    <color name="text_invisible">#bdbdbd</color>
+    <color name="border_gray_avatar">#424242</color>
+
+    <color name="text_exercise_name">#898989</color>
+    <color name="bg_exercise_name">#CECECE</color>
+    <color name="tab_hight_light">#ffd800</color>
+    <color name="tab_normal">#424242</color>
+    <color name="divider_nav">#424242</color>
+    <color name="note">#bdbdbd</color>
+    <color name="bg_item_tap">#bdbdbd</color>
+    <color name="tab_unselect">#bdbdbd</color>
+    <color name="bg_title_dialog">#F1F1F1</color>
+    <color name="title_dialog">#212121</color>
+    <color name="text_template">#212121</color>
+    <color name="text_template_equiment">#5599e5</color>
+
+    <color name="light_border_grey">#AAAAAA</color>
+
+    <color name="divider_white">#E7E4E4</color>
+
+    <color name="divider_media">#979797</color>
+
+    <color name="bg_below_media">#44000000</color>
+    <color name="color_not_edit_ted">#adadad</color>
+    <color name="view_divider_yellow">#FFD800</color>
+    <color name="divider_grey">#979797</color>
+    <color name="green_2">#299864</color>
+    <color name="selected_date">#404040</color>
 </resources>
