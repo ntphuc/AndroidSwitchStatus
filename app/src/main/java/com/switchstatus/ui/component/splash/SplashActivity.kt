@@ -8,6 +8,7 @@ import com.switchstatus.ui.ViewModelFactory
 import com.switchstatus.ui.base.BaseActivity
 import com.switchstatus.ui.component.login.LoginActivity
 import com.switchstatus.SPLASH_DELAY
+import com.switchstatus.ui.component.switches.SwitchesListActivity
 import javax.inject.Inject
 
 /**
@@ -44,7 +45,7 @@ class SplashActivity : BaseActivity(){
 
     private fun navigateToMainScreen() {
         Handler().postDelayed({
-            val nextScreenIntent = Intent(this, LoginActivity::class.java)
+            val nextScreenIntent = Intent(this, SwitchesListActivity::class.java)
             startActivity(nextScreenIntent)
             finish()
         }, SPLASH_DELAY.toLong())

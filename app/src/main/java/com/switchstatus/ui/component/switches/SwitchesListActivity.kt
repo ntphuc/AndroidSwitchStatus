@@ -57,6 +57,8 @@ class SwitchesListActivity : BaseActivity() {
 
         registerBroadcast()
 
+        subcribeTopicNotify()
+
         val layoutManager = LinearLayoutManager(this)
         binding.rvSwitchesList.layoutManager = layoutManager
         binding.rvSwitchesList.setHasFixedSize(true)
