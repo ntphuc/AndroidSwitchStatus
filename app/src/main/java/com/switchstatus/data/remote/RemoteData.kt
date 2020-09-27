@@ -110,12 +110,12 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
         }
     }
 
-    private suspend fun processCallParam(request: BaseRequest, responseCall: suspend (BaseRequest) -> Response<*>): Any? {
+    private suspend fun processCallParam(request: BaseRequest, responseCall: suspend (String) -> Response<*>): Any? {
         if (!networkConnectivity.isConnected()) {
             return NO_INTERNET_CONNECTION
         }
         return try {
-            val response = responseCall.invoke(request)
+            val response = responseCall.invoke(request.toJSON()!!)
             val responseCode = response.code()
             if (response.isSuccessful) {
                 response.body()
@@ -127,12 +127,13 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
         }
     }
 
-    private suspend fun processCallUpdateStatus(itemSwitch: ItemSwitch, request: BaseRequest, responseCall: suspend (String, BaseRequest) -> Response<*>): Any? {
+    private suspend fun processCallUpdateStatus(itemSwitch: ItemSwitch, request: BaseRequest, responseCall: suspend (String, String) -> Response<*>): Any? {
         if (!networkConnectivity.isConnected()) {
             return NO_INTERNET_CONNECTION
         }
+        val body: String = "{\"status\":false}";
         return try {
-            val response = responseCall.invoke(itemSwitch.name, request)
+            val response = responseCall.invoke(itemSwitch.name, body)
             val responseCode = response.code()
             if (response.isSuccessful) {
                 ItemStatus (itemSwitch,(request as RequestUpdateStatus).status)

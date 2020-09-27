@@ -1,17 +1,17 @@
 package com.switchstatus.data.remote
 
-import com.switchstatus.data.remote.moshiFactories.MyKotlinJsonAdapterFactory
+import com.google.gson.Gson
 import com.squareup.moshi.Moshi
 import com.switchstatus.APP_KEY
-import com.switchstatus.BuildConfig
-import com.switchstatus.data.remote.moshiFactories.MyStandardJsonAdapters
-import com.switchstatus.BASE_URL
 import com.switchstatus.BASE_URL_THINGWORX
+import com.switchstatus.BuildConfig
+import com.switchstatus.data.remote.moshiFactories.MyKotlinJsonAdapterFactory
+import com.switchstatus.data.remote.moshiFactories.MyStandardJsonAdapters
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -62,7 +62,7 @@ class ServiceGenerator @Inject constructor() {
         val client = okHttpBuilder.build()
         retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL_THINGWORX).client(client)
-                .addConverterFactory(MoshiConverterFactory.create(getMoshi()))
+                .addConverterFactory(GsonConverterFactory.create(Gson()))
                 .build()
     }
 
