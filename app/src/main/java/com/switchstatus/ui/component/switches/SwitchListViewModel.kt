@@ -35,9 +35,10 @@ constructor(private val dataRepositoryRepository: DataRepositorySource) : BaseVi
     private val showToastPrivate = MutableLiveData<SingleEvent<Any>>()
     val showToast: LiveData<SingleEvent<Any>> get() = showToastPrivate
     
-    fun fetchListSwitches() {
+    fun fetchListSwitches(showLoading: Boolean) {
         viewModelScope.launch {
-            switchesLiveDataPrivate.value = Resource.Loading()
+            if (showLoading)
+                switchesLiveDataPrivate.value = Resource.Loading()
             wrapEspressoIdlingResource {
                 dataRepositoryRepository.requestListSwitches().collect {
                     switchesLiveDataPrivate.value = it

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.switchstatus.ACTION_PUSH_NOTIFICATION
 import com.switchstatus.LOG_TAG
 import com.switchstatus.R
+import com.switchstatus.TIME_DELAY_REFRESH
 import com.switchstatus.data.Resource
 import com.switchstatus.data.dto.switches.ItemStatus
 import com.switchstatus.data.dto.switches.ItemSwitch
@@ -32,7 +34,7 @@ import javax.inject.Inject
 
 class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
 
-    private lateinit var switchesAdapter: SwitchesAdapter
+    private var switchesAdapter: SwitchesAdapter? = null
     private lateinit var binding: SwitchListActivityBinding
 
     @Inject
@@ -40,6 +42,15 @@ class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
+    var mainHandler: Handler = Handler()
+
+    private val refreshView = object : Runnable {
+        override fun run() {
+            switchListViewModel.fetchListSwitches(false)
+            mainHandler.postDelayed(this, TIME_DELAY_REFRESH)
+        }
+    }
 
     val broadCastReceiver = object : BroadcastReceiver() {
         override fun onReceive(contxt: Context?, intent: Intent?) {
@@ -74,7 +85,17 @@ class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
        // binding.rvSwitchesList.addItemDecoration(DividerItemDecoration(binding.rvSwitchesList.getContext(), DividerItemDecoration.VERTICAL))
 
 
-        switchListViewModel.fetchListSwitches()
+        switchListViewModel.fetchListSwitches(true)
+    }
+
+    override fun onResume() {
+        mainHandler.postDelayed(refreshView, TIME_DELAY_REFRESH)
+        super.onResume()
+    }
+
+    override fun onPause() {
+        mainHandler.removeCallbacks(refreshView)
+        super.onPause()
     }
 
     private fun subcribeTopicNotify() {
@@ -173,9 +194,14 @@ class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
 
     private fun bindListData(switches: Switches) {
         if (!(switches.switches.isNullOrEmpty())) {
-            switchesAdapter = SwitchesAdapter(switchListViewModel, switches.switches)
-            switchesAdapter.setOnSwitchStatusListener(this)
-            binding.rvSwitchesList.adapter = switchesAdapter
+            if (switchesAdapter == null) {
+                switchesAdapter = SwitchesAdapter(switchListViewModel, switches.switches)
+                switchesAdapter!!.setOnSwitchStatusListener(this)
+                binding.rvSwitchesList.adapter = switchesAdapter
+            }else{
+                switchesAdapter!!.setData(switches.switches)
+
+            }
             showDataView(true)
         } else {
             showDataView(false)
