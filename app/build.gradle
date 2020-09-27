@@ -12,14 +12,14 @@ android {
     compileSdkVersion 29
     buildToolsVersion '29.0.3'
     defaultConfig {
-        applicationId 'com.eltaher.task'
+        applicationId 'com.switchstatus'
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "com.task.CustomTestRunner"
+        testInstrumentationRunner "com.switchstatus.CustomTestRunner"
     }
     buildFeatures{
          viewBinding = true

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1060377569813",
+    "firebase_url": "https://switchstatusdemo.firebaseio.com",
+    "project_id": "switchstatusdemo",
+    "storage_bucket": "switchstatusdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060377569813:android:5e48dd7b69e07bd9b3fc1c",
+        "android_client_info": {
+          "package_name": "com.switchstatus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060377569813-85dln0166chso96p4fuh3769pdng8c1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1AS5WAhRDjAX71tKIrujirXrxg9ObcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060377569813-85dln0166chso96p4fuh3769pdng8c1n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
