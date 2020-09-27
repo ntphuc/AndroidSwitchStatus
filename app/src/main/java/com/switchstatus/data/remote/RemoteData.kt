@@ -3,6 +3,7 @@ package com.switchstatus.data.remote
 import com.switchstatus.data.Resource
 import com.switchstatus.data.dto.recipes.Recipes
 import com.switchstatus.data.dto.recipes.RecipesItem
+import com.switchstatus.data.dto.switches.ItemStatus
 import com.switchstatus.data.dto.switches.ItemSwitch
 import com.switchstatus.data.dto.switches.Switches
 import com.switchstatus.data.error.NETWORK_ERROR
@@ -10,9 +11,8 @@ import com.switchstatus.data.error.NO_INTERNET_CONNECTION
 import com.switchstatus.data.remote.service.RecipesService
 import com.switchstatus.data.request.BaseRequest
 import com.switchstatus.data.request.RequestBodySwitches
+import com.switchstatus.data.request.RequestUpdateStatus
 import com.switchstatus.utils.NetworkConnectivity
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
@@ -59,7 +59,7 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
 
     override suspend fun requestListSwitches(requestBodySwitches: RequestBodySwitches): Resource<Switches> {
         val recipesService = serviceGenerator.createService(RecipesService::class.java)
-        return when (val response = processCallParam (requestBodySwitches, recipesService::fetchSwitches)) {
+        return when (val response = processCallParam(requestBodySwitches, recipesService::fetchSwitches)) {
             is Switches -> {
                 Resource.Success(data = Switches(response.switches as ArrayList<ItemSwitch>))
             }
@@ -76,6 +76,18 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
                 Resource.Success(data = Recipes(response as ArrayList<RecipesItem>))
             }
             else -> {
+                Resource.DataError(errorCode = response as Int)
+            }
+        }
+    }
+
+
+    override suspend fun requestUpdateStatus(itemSwitch: ItemSwitch, requestUpdateStatus: RequestUpdateStatus): Resource<ItemStatus>  {
+        val recipesService = serviceGenerator.createService(RecipesService::class.java)
+        return when (val response = processCallUpdateStatus(itemSwitch, requestUpdateStatus, recipesService::updateStatus)) {
+            is ItemStatus -> {
+                Resource.Success(data = response as ItemStatus)
+            } else -> {
                 Resource.DataError(errorCode = response as Int)
             }
         }
@@ -114,4 +126,23 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
             NETWORK_ERROR
         }
     }
+
+    private suspend fun processCallUpdateStatus(itemSwitch: ItemSwitch, request: BaseRequest, responseCall: suspend (String, BaseRequest) -> Response<*>): Any? {
+        if (!networkConnectivity.isConnected()) {
+            return NO_INTERNET_CONNECTION
+        }
+        return try {
+            val response = responseCall.invoke(itemSwitch.name, request)
+            val responseCode = response.code()
+            if (response.isSuccessful) {
+                ItemStatus (itemSwitch,(request as RequestUpdateStatus).status)
+            } else {
+                responseCode
+            }
+
+        } catch (e: IOException) {
+            NETWORK_ERROR
+        }
+    }
+
 }

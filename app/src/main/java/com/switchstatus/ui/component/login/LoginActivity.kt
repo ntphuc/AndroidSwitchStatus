@@ -9,7 +9,7 @@ import com.switchstatus.data.dto.login.LoginResponse
 import com.switchstatus.databinding.LoginActivityBinding
 import com.switchstatus.ui.ViewModelFactory
 import com.switchstatus.ui.base.BaseActivity
-import com.switchstatus.ui.component.recipes.RecipesListActivity
+import com.switchstatus.ui.component.switches.SwitchesListActivity
 import com.switchstatus.utils.*
 import javax.inject.Inject
 
@@ -67,7 +67,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun navigateToMainScreen() {
-        val nextScreenIntent = Intent(this, RecipesListActivity::class.java)
+        val nextScreenIntent = Intent(this, SwitchesListActivity::class.java)
         startActivity(nextScreenIntent)
         finish()
     }

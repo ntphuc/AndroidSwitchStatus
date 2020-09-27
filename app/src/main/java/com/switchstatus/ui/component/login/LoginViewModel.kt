@@ -12,7 +12,6 @@ import com.switchstatus.data.error.CHECK_YOUR_FIELDS
 import com.switchstatus.data.error.PASS_WORD_ERROR
 import com.switchstatus.data.error.USER_NAME_ERROR
 import com.switchstatus.ui.base.BaseViewModel
-import com.switchstatus.utils.RegexUtils.isValidEmail
 import com.switchstatus.utils.SingleEvent
 import com.switchstatus.utils.wrapEspressoIdlingResource
 import kotlinx.coroutines.flow.collect
@@ -41,7 +40,7 @@ class LoginViewModel @Inject constructor(private val dataRepository: DataReposit
 
 
     fun doLogin(userName: String, passWord: String) {
-        val isUsernameValid = isValidEmail(userName)
+        val isUsernameValid = true //isValidEmail(userName)
         val isPassWordValid = passWord.trim().length > 4
         if (isUsernameValid && !isPassWordValid) {
             loginLiveDataPrivate.value = Resource.DataError(PASS_WORD_ERROR)

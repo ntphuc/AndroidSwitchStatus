@@ -1,9 +1,12 @@
 package com.switchstatus.data
 
-import com.switchstatus.data.dto.recipes.Recipes
 import com.switchstatus.data.dto.login.LoginRequest
 import com.switchstatus.data.dto.login.LoginResponse
+import com.switchstatus.data.dto.recipes.Recipes
+import com.switchstatus.data.dto.switches.ItemStatus
+import com.switchstatus.data.dto.switches.ItemSwitch
 import com.switchstatus.data.dto.switches.Switches
+import com.switchstatus.data.request.RequestUpdateStatus
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -17,4 +20,5 @@ interface DataRepositorySource {
     suspend fun addToFavourite(id: String): Flow<Resource<Boolean>>
     suspend fun removeFromFavourite(id: String): Flow<Resource<Boolean>>
     suspend fun isFavourite(id: String): Flow<Resource<Boolean>>
+    suspend fun requestUpdateStatus(item: ItemSwitch, requestUpdateBody: RequestUpdateStatus): Flow<Resource<ItemStatus>>
 }

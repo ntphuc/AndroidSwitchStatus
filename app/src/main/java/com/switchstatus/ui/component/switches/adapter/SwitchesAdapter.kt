@@ -18,6 +18,8 @@ import com.switchstatus.ui.component.switches.SwitchListViewModel
 
 class SwitchesAdapter(private val switchListViewModel: SwitchListViewModel, private val switches: List<ItemSwitch>) : RecyclerView.Adapter<SwitchViewHolder>() {
 
+    private var mSwitchStatusListener: SwitchStatusListener? = null
+    
     private val onItemClickListener: RecyclerItemListener = object : RecyclerItemListener {
         override fun onItemSelected(recipe: RecipesItem) {
            // switchListViewModel.openRecipeDetails(recipe)
@@ -26,7 +28,7 @@ class SwitchesAdapter(private val switchListViewModel: SwitchListViewModel, priv
 
     private val onSwitchStatusListener: SwitchStatusListener = object : SwitchStatusListener {
         override fun onSwitchStatusListener(item: ItemSwitch, newStatus: Boolean) {
-            TODO("Not yet implemented")
+            mSwitchStatusListener?.onSwitchStatusListener(item, newStatus)
         }
 
     }
@@ -42,6 +44,10 @@ class SwitchesAdapter(private val switchListViewModel: SwitchListViewModel, priv
 
     override fun getItemCount(): Int {
         return switches.size
+    }
+
+    fun setOnSwitchStatusListener(listener: SwitchStatusListener) {
+        this.mSwitchStatusListener = listener;
     }
 }
 

@@ -6,7 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.switchstatus.data.DataRepositorySource
 import com.switchstatus.data.Resource
+import com.switchstatus.data.dto.switches.ItemStatus
+import com.switchstatus.data.dto.switches.ItemSwitch
 import com.switchstatus.data.dto.switches.Switches
+import com.switchstatus.data.request.RequestUpdateStatus
 import com.switchstatus.ui.base.BaseViewModel
 import com.switchstatus.utils.SingleEvent
 import com.switchstatus.utils.wrapEspressoIdlingResource
@@ -25,6 +28,8 @@ constructor(private val dataRepositoryRepository: DataRepositorySource) : BaseVi
     val switchesLiveDataPrivate = MutableLiveData<Resource<Switches>>()
     val switchesLiveData: LiveData<Resource<Switches>> get() = switchesLiveDataPrivate
 
+    val statusLiveDataPrivate = MutableLiveData<Resource<ItemStatus>>()
+    val statusLiveData: LiveData<Resource<ItemStatus>> get() = statusLiveDataPrivate
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     private val showToastPrivate = MutableLiveData<SingleEvent<Any>>()
@@ -44,6 +49,20 @@ constructor(private val dataRepositoryRepository: DataRepositorySource) : BaseVi
     fun showToastMessage(errorCode: Int) {
         val error = errorManager.getError(errorCode)
         showToastPrivate.value = SingleEvent(error.description)
+    }
+
+    fun updateSwitchStatus(item: ItemSwitch, newStatus: Boolean) {
+        val requestUpdateBody = RequestUpdateStatus()
+        requestUpdateBody.status = newStatus
+        viewModelScope.launch {
+           // switchesLiveDataPrivate.value = Resource.Loading()
+            wrapEspressoIdlingResource {
+                dataRepositoryRepository.requestUpdateStatus(item, requestUpdateBody).collect {
+                    statusLiveDataPrivate.value = it
+                }
+            }
+        }
+
     }
 
 }

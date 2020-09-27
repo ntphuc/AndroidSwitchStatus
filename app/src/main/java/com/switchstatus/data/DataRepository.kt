@@ -3,10 +3,13 @@ package com.switchstatus.data
 import com.switchstatus.data.dto.login.LoginRequest
 import com.switchstatus.data.dto.login.LoginResponse
 import com.switchstatus.data.dto.recipes.Recipes
+import com.switchstatus.data.dto.switches.ItemStatus
+import com.switchstatus.data.dto.switches.ItemSwitch
 import com.switchstatus.data.dto.switches.Switches
 import com.switchstatus.data.local.LocalData
 import com.switchstatus.data.remote.RemoteData
 import com.switchstatus.data.request.RequestBodySwitches
+import com.switchstatus.data.request.RequestUpdateStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -66,6 +69,12 @@ class DataRepository @Inject constructor(private val remoteRepository: RemoteDat
     override suspend fun isFavourite(id: String): Flow<Resource<Boolean>> {
         return flow {
             emit(localRepository.isFavourite(id))
+        }.flowOn(ioDispatcher)
+    }
+
+    override suspend fun requestUpdateStatus(itemSwitch: ItemSwitch, requestUpdateStatus: RequestUpdateStatus): Flow<Resource<ItemStatus>> {
+        return flow {
+            emit(remoteRepository.requestUpdateStatus(itemSwitch,requestUpdateStatus))
         }.flowOn(ioDispatcher)
     }
 }

@@ -10,24 +10,26 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import com.switchstatus.ACTION_PUSH_NOTIFICATION
 import com.switchstatus.LOG_TAG
 import com.switchstatus.R
 import com.switchstatus.data.Resource
+import com.switchstatus.data.dto.switches.ItemStatus
+import com.switchstatus.data.dto.switches.ItemSwitch
 import com.switchstatus.data.dto.switches.Switches
 import com.switchstatus.databinding.SwitchListActivityBinding
 import com.switchstatus.ui.ViewModelFactory
 import com.switchstatus.ui.base.BaseActivity
+import com.switchstatus.ui.base.listeners.SwitchStatusListener
 import com.switchstatus.ui.component.switches.adapter.SwitchesAdapter
 import com.switchstatus.utils.observe
 import com.switchstatus.utils.toGone
 import com.switchstatus.utils.toVisible
 import javax.inject.Inject
 
-class SwitchesListActivity : BaseActivity() {
+class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
 
     private lateinit var switchesAdapter: SwitchesAdapter
     private lateinit var binding: SwitchListActivityBinding
@@ -105,6 +107,25 @@ class SwitchesListActivity : BaseActivity() {
 
     override fun observeViewModel() {
         observe(switchListViewModel.switchesLiveData, ::handleSwitchesList)
+        observe(switchListViewModel.statusLiveData, ::handleUpdateStatus)
+
+    }
+
+    private fun handleUpdateStatus(result: Resource<ItemStatus>) {
+        when (result) {
+            is Resource.Success -> result.data?.let {
+                bindingNewStatus(it)
+            }
+            is Resource.DataError -> {
+                result.errorCode?.let { switchListViewModel.showToastMessage(it) }
+            }
+        }
+
+    }
+
+    private fun bindingNewStatus(it: ItemStatus) {
+        it.itemSwitch.status = it.status;
+        binding.rvSwitchesList.adapter?.notifyDataSetChanged()
     }
 
     override fun initViewBinding() {
@@ -144,6 +165,7 @@ class SwitchesListActivity : BaseActivity() {
     private fun bindListData(switches: Switches) {
         if (!(switches.switches.isNullOrEmpty())) {
             switchesAdapter = SwitchesAdapter(switchListViewModel, switches.switches)
+            switchesAdapter.setOnSwitchStatusListener(this)
             binding.rvSwitchesList.adapter = switchesAdapter
             showDataView(true)
         } else {
@@ -155,6 +177,11 @@ class SwitchesListActivity : BaseActivity() {
         binding.tvNoData.visibility = if (show) View.GONE else View.VISIBLE
         binding.rvSwitchesList.visibility = if (show) View.VISIBLE else View.GONE
         binding.pbLoading.toGone()
+    }
+
+    override fun onSwitchStatusListener(item: ItemSwitch, newStatus: Boolean) {
+        switchListViewModel.updateSwitchStatus(item, newStatus)
+
     }
 
 }

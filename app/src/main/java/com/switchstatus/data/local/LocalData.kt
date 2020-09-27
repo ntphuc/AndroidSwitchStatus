@@ -2,11 +2,11 @@ package com.switchstatus.data.local
 
 import android.content.SharedPreferences
 import com.switchstatus.App.Companion.context
+import com.switchstatus.FAVOURITES_KEY
+import com.switchstatus.SHARED_PREFERENCES_FILE_NAME
 import com.switchstatus.data.Resource
 import com.switchstatus.data.dto.login.LoginRequest
 import com.switchstatus.data.dto.login.LoginResponse
-import com.switchstatus.FAVOURITES_KEY
-import com.switchstatus.SHARED_PREFERENCES_FILE_NAME
 import com.switchstatus.data.error.PASS_WORD_ERROR
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class LocalData @Inject constructor() {
 
     fun doLogin(loginRequest: LoginRequest): Resource<LoginResponse> {
-        if (loginRequest == LoginRequest("ahmed@ahmed.ahmed", "ahmed")) {
+        if (loginRequest == LoginRequest("admin", "admin")) {
             return Resource.Success(LoginResponse("123", "Ahmed", "Mahmoud",
                     "FrunkfurterAlle", "77", "12000", "Berlin",
                     "Germany", "ahmed@ahmed.ahmed"))

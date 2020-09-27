@@ -12,8 +12,8 @@ data class ItemSwitch(
         @Json(name = "name")
         val name: String = "",
         @Json(name = "status")
-        val status: Boolean = false,
-        @Json(name = "card")
-        val card: String = "",
+        var status: Boolean = false,
+        @Json(name = "displayName")
+        val displayName: String = "",
 
 ) : Parcelable
