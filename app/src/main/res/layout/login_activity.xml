@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
     tools:context="com.switchstatus.ui.component.login.LoginActivity">
 
     <EditText
@@ -12,12 +13,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_24x"
-        android:layout_marginTop="@dimen/space_96x"
+        android:layout_marginTop="350dp"
         android:layout_marginEnd="@dimen/space_24x"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
+
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
         android:text="@string/test_email"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,9 +36,12 @@
         android:layout_marginEnd="@dimen/space_24x"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
+        android:backgroundTint="@color/white"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:textSize="18sp"
         android:selectAllOnFocus="true"
+        android:textColor="@color/white"
         android:text="@string/test_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,14 +49,15 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_gravity="start"
         android:layout_marginStart="@dimen/space_48x"
         android:layout_marginTop="@dimen/space_16x"
         android:layout_marginEnd="@dimen/space_48x"
         android:layout_marginBottom="@dimen/space_64x"
         android:text="@string/action_sign_in"
+        android:textSize="@dimen/space_16x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,3 +78,9 @@
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--   android:paddingLeft="20dp"
+       android:paddingRight="20dp"
+       android:paddingTop="8dp"
+       android:paddingBottom="8dp"-->

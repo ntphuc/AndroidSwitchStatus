@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".ui.component.login.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

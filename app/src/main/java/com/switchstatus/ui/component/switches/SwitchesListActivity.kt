@@ -7,7 +7,6 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.gms.tasks.OnCompleteListener
@@ -87,7 +86,7 @@ class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
                         msg = getString(R.string.msg_subscribe_failed)
                     }
                     Log.d(LOG_TAG, msg)
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                 }
         // [END subscribe_topics]
 
@@ -105,7 +104,7 @@ class SwitchesListActivity : BaseActivity(), SwitchStatusListener {
                     // Log and toast
                     val msg = getString(R.string.msg_token_fmt, token)
                     Log.d(LOG_TAG, msg)
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
 
                 })
         // [END retrieve_current_token]
