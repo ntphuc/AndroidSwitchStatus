@@ -176,5 +176,7 @@ dependencies {
 
     //dialog
     implementation 'com.afollestad.material-dialogs:core:3.2.1'
+    implementation 'com.github.angads25:toggle:1.1.0'
+
 
 }
