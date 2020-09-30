@@ -1,5 +1,6 @@
 package com.switchstatus.data.remote
 
+import android.util.Log
 import com.google.gson.JsonObject
 import com.switchstatus.data.Resource
 import com.switchstatus.data.dto.recipes.Recipes
@@ -117,6 +118,7 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
         }
         return try {
             val response = responseCall.invoke(request.toJSON()!!)
+            Log.e("Phuc", response.message() +" "+ response.code())
             val responseCode = response.code()
             if (response.isSuccessful) {
                 response.body()

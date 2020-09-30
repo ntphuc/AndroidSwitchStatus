@@ -16,6 +16,6 @@ const val LOG_TAG = "LOG_TAG"
 const val ACTION_PUSH_NOTIFICATION = "ACTION_PUSH_NOTIFICATION"
 
 
-const val BASE_URL_THINGWORX = "http://172.21.44.9:8080/Thingworx/Things/"
+const val BASE_URL_THINGWORX = "http://113.164.236.176:8080/Thingworx/Things/"
 const val APP_KEY = "b44b5c35-dbe0-4783-a59c-528145ff3a06"
 
