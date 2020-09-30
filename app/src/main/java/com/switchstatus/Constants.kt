@@ -4,7 +4,7 @@ package com.switchstatus
  * Created by AhmedEltaher
  */
 
-const val TIME_DELAY_REFRESH : Long = 6000
+const val TIME_DELAY_REFRESH : Long = 3000
 const val SPLASH_DELAY = 3000
 const val BASE_URL = "https://hf-android-app.s3-eu-west-1.amazonaws.com/android-test/"
 const val RECIPE_ITEM_KEY = "RECIPE_ITEM_KEY"
@@ -16,6 +16,6 @@ const val LOG_TAG = "LOG_TAG"
 const val ACTION_PUSH_NOTIFICATION = "ACTION_PUSH_NOTIFICATION"
 
 
-const val BASE_URL_THINGWORX = "https://pp-2009210717tp.devportal.ptc.io/Thingworx/Things/"
-const val APP_KEY = "6eeaff10-3812-487f-a7e3-7321f2aea7b9"
+const val BASE_URL_THINGWORX = "http://172.21.44.9:8080/Thingworx/Things/"
+const val APP_KEY = "b44b5c35-dbe0-4783-a59c-528145ff3a06"
 
